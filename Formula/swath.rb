@@ -11,6 +11,14 @@ class Swath < Formula
     strategy :github_latest
   end
 
+  bottle do
+    root_url "https://github.com/varveio/homebrew-tap/releases/download/swath-0.4.0"
+    sha256 cellar: :any_skip_relocation, arm64_tahoe:   "6612d1929171370e926b7217df0c853c5900135b9d32741f9c5b576442e8dc40"
+    sha256 cellar: :any_skip_relocation, arm64_sequoia: "92a705e47b68cabf11f4b163d914a7073227b2d943a4abca3848230d23397f8b"
+    sha256 cellar: :any_skip_relocation, arm64_linux:   "592cbfa3111707203a4ff4a912b023913d8b818171e782f3ab90477e1c9e015b"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:  "14a7ee1270704c79cb599c1c67080b2f59af5ce79fb5834b5cec1739735cfee2"
+  end
+
   depends_on "go" => :build
 
   deny_network_access!
