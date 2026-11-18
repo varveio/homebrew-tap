@@ -17,9 +17,16 @@ jobs:
   test-bot:
     strategy:
       matrix:
-        os: [ macos-26 ]
+        # Bottles for Apple silicon on macOS 15 and 26 and for Linux on x86-64 and
+        # ARM64; a bottle serves its macOS version and later. Intel macOS (Homebrew
+        # Tier 3) builds from source.
+        os: [ macos-15, macos-26 ]
         include:
           - os: ubuntu-latest
+            container:
+              image: ghcr.io/homebrew/brew:main
+              options: --privileged
+          - os: ubuntu-24.04-arm
             container:
               image: ghcr.io/homebrew/brew:main
               options: --privileged

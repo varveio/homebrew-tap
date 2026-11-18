@@ -17,11 +17,12 @@ Installing by the full name trusts only that formula; see Homebrew's
 
 ```ruby
 tap "varveio/tap"
-brew "varveio/tap/<formula>"
+brew "varveio/tap/<formula>", trusted: true
 ```
 
 Formulae build from their release's source. Bottles, built and tested by this tap's CI, install
-without a build toolchain on the platforms they cover; elsewhere Homebrew builds from source.
+without a build toolchain on Apple silicon (macOS 15 and later) and on Linux (x86-64 and ARM64);
+elsewhere, Intel macOS included, Homebrew builds from source.
 
 ## Maintaining
 
@@ -29,6 +30,7 @@ without a build toolchain on the platforms they cover; elsewhere Homebrew builds
 - `publish.yml` (`brew pr-pull`) is run by hand with a green pull request's number. It
   uploads that PR's bottles to a GitHub release, adds the bottle block to the formula and
   pushes to `main`.
-- `autobump.yml` checks daily for new releases and opens version-bump pull requests.
-  Pull requests opened with the workflow's own token do not start other workflows, so close
-  and reopen a bump PR to run `tests.yml` on it before publishing.
+- Version bumps are manual for now: `brew bump-formula-pr --tap=varveio/tap <formula>`
+  opens the pull request. `autobump.yml`, the scaffold's daily bump, is disabled: the
+  organization does not let workflows open pull requests, and a pull request opened with a
+  workflow's own token would not start `tests.yml`. A GitHub App token will enable it.
